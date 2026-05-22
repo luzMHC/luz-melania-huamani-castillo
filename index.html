@@ -60,12 +60,22 @@
         }
         @keyframes textoCarga { 0%, 66% { content: "CARGANDO..."; } 100% { content: "LISTO"; color: #fff; } }
 
-        /* NOMBRES FLOTANTES */
+        /* SECCIÓN INICIAL (LA "HOJA" QUE OCUPA TODO EL ALTO) */
+        .hero-screen {
+            height: 100vh; /* Ocupa el 100% del alto de la pantalla */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+
+        /* NOMBRES FLOTANTES (TAMAÑO ORIGINAL) */
         @keyframes flotarNombre { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
         .nombre-linea {
             font-size: clamp(2.5rem, 12vw, 6rem);
             font-weight: 800;
-            margin: 20px 0;
+            margin: 10px 0;
             text-transform: uppercase;
             text-align: center;
             animation: flotarNombre 4s ease-in-out infinite;
@@ -80,7 +90,7 @@
             max-width: 900px;
             overflow: hidden;
             padding: 10px 0;
-            margin: 20px auto;
+            margin: 15px auto;
         }
         @keyframes marqueeInfinito { from { transform: translateX(0); } to { transform: translateX(-50%); } }
         .marquee-content { display: inline-block; white-space: nowrap; animation: marqueeInfinito 15s linear infinite; }
@@ -113,7 +123,7 @@
         }
         .section:hover .info-circle { transform: translate(-50%, -50%) scale(1); }
 
-        /* INTERESES CON IMÁGENES Y TEXTO FLUIDO */
+        /* INTERESES FLUIDOS */
         @keyframes moverPaisaje { from { background-position: 0% 50%; } to { background-position: 100% 50%; } }
         .interests-row { 
             display: none; 
@@ -150,17 +160,21 @@
     </div>
 
     <div id="main-content">
-        <h1 class="nombre-linea">LUZ MELANIA</h1>
+        <!-- ESTA ES LA "HOJA" INICIAL DE TU NOMBRE -->
+        <div class="hero-screen">
+            <h1 class="nombre-linea">LUZ MELANIA</h1>
 
-        <div class="marquee-black">
-            <div class="marquee-content">
-                <span class="marquee-text">BIENVENIDO A MI PRIMERA PÁGINA ● WELCOME TO MY FIRST PAGE ● BIENVENIDO A MI PRIMERA PÁGINA ● WELCOME TO MY FIRST PAGE ●&nbsp;</span>
-                <span class="marquee-text">BIENVENIDO A MI PRIMERA PÁGINA ● WELCOME TO MY FIRST PAGE ● BIENVENIDO A MI PRIMERA PÁGINA ● WELCOME TO MY FIRST PAGE ●&nbsp;</span>
+            <div class="marquee-black">
+                <div class="marquee-content">
+                    <span class="marquee-text">BIENVENIDO A MI PRIMERA PÁGINA ● WELCOME TO MY FIRST PAGE ● BIENVENIDO A MI PRIMERA PÁGINA ● WELCOME TO MY FIRST PAGE ●&nbsp;</span>
+                    <span class="marquee-text">BIENVENIDO A MI PRIMERA PÁGINA ● WELCOME TO MY FIRST PAGE ● BIENVENIDO A MI PRIMERA PÁGINA ● WELCOME TO MY FIRST PAGE ●&nbsp;</span>
+                </div>
             </div>
+
+            <h1 class="nombre-linea">HUAMANI CASTILLO</h1>
         </div>
 
-        <h1 class="nombre-linea">HUAMANI CASTILLO</h1>
-
+        <!-- LAS DEMÁS SECCIONES APARECEN AL DESLIZAR -->
         <div class="section">
             <div class="section-title">
                 AB<span class="letra-o">O<div class="info-circle">
@@ -177,7 +191,6 @@
                     🌸 Me gusta hacer deporte y mantenerme en movimiento.
                 </div>
                 <div class="circle-interest" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1512820790803-83ca734da794?q=80&w=600');">
-                    <!-- Texto de corrido con espacio antes del enlace -->
                     📖 Disfruto leer en &nbsp; <a href="https://www.ellibrototal.com/ltotal/" target="_blank">El Libro Total</a>.
                 </div>
                 <div class="circle-interest" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=600');">
@@ -196,7 +209,6 @@
     </div>
 
     <script>
-        /* Temporizador de 2 segundos para el loader */
         setTimeout(() => {
             const loader = document.getElementById('loader');
             loader.style.opacity = '0';
