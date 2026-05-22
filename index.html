@@ -6,8 +6,8 @@
     
     <!-- SEO PARA GOOGLE -->
     <title>Luz Melania Huamani Castillo | Portafolio Profesional</title>
-    <meta name="description" content="Página oficial y portafolio profesional de Luz Melania Huamani Castillo. Estudiante de Administración de Negocios en la UCSP.">
-    <meta name="keywords" content="Luz Melania Huamani Castillo, UCSP, Administración de Negocios, Portafolio">
+    <meta name="description" content="Página oficial y portafolio profesional de Luz Melania Huamani Castillo. Estudiante de la UCSP.">
+    <meta name="keywords" content="Luz Melania Huamani Castillo, UCSP, LinkedIn, Portafolio Profesional">
     
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;800&display=swap" rel="stylesheet">
 
@@ -60,9 +60,9 @@
         }
         @keyframes textoCarga { 0%, 66% { content: "CARGANDO..."; } 100% { content: "LISTO"; color: #fff; } }
 
-        /* SECCIÓN INICIAL (LA "HOJA" QUE OCUPA TODO EL ALTO) */
+        /* SECCIÓN INICIAL (HOJA PANTALLA COMPLETA) */
         .hero-screen {
-            height: 100vh; /* Ocupa el 100% del alto de la pantalla */
+            height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -70,7 +70,7 @@
             width: 100%;
         }
 
-        /* NOMBRES FLOTANTES (TAMAÑO ORIGINAL) */
+        /* NOMBRES FLOTANTES */
         @keyframes flotarNombre { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
         .nombre-linea {
             font-size: clamp(2.5rem, 12vw, 6rem);
@@ -108,7 +108,7 @@
         .section:hover { background-color: #ffffff; color: #000000; }
         .section-title { font-size: clamp(2.5rem, 10vw, 4.5rem); font-weight: 900; text-transform: uppercase; }
 
-        /* CÍRCULO INFO */
+        /* CÍRCULO INFO ACTUALIZADO */
         .letra-o { position: relative; display: inline-block; }
         .info-circle {
             position: absolute;
@@ -123,7 +123,7 @@
         }
         .section:hover .info-circle { transform: translate(-50%, -50%) scale(1); }
 
-        /* INTERESES FLUIDOS */
+        /* INTERESES CON IMÁGENES Y TEXTO FLUIDO */
         @keyframes moverPaisaje { from { background-position: 0% 50%; } to { background-position: 100% 50%; } }
         .interests-row { 
             display: none; 
@@ -160,7 +160,7 @@
     </div>
 
     <div id="main-content">
-        <!-- ESTA ES LA "HOJA" INICIAL DE TU NOMBRE -->
+        <!-- HOJA INICIAL -->
         <div class="hero-screen">
             <h1 class="nombre-linea">LUZ MELANIA</h1>
 
@@ -174,12 +174,13 @@
             <h1 class="nombre-linea">HUAMANI CASTILLO</h1>
         </div>
 
-        <!-- LAS DEMÁS SECCIONES APARECEN AL DESLIZAR -->
+        <!-- SECCIONES AL DESLIZAR -->
         <div class="section">
             <div class="section-title">
                 AB<span class="letra-o">O<div class="info-circle">
+                    <!-- INFO ACTUALIZADA: UCSP + LINK PROFESIONAL -->
                     <p>Estudiante de la <a href="https://ucsp.edu.pe/" target="_blank">UCSP</a></p>
-                    
+                    <p>Perfil profesional: <a href="https://www.linkedin.com/in/luz-melania-huamani-castillo-bb7ab1410/" target="_blank">LinkedIn</a></p>
                 </div></span>UT ME
             </div>
         </div>
