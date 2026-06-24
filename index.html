@@ -4,17 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Luz Melania Huamani Castillo | Portafolio Profesional</title>
-    
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;800&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            --pink-baby: #FFB6C1;    /* Rosado original de tus fuentes [2] */
-            --bg-black: #000000;     
+            --pink-baby: #FFB6C1;
+            --bg-black: #000000;
             --text-white: #ffffff;
         }
 
-        /* FONDO GALÁCTICO ANIMADO [2, 3] */
         @keyframes estrellas { from { background-position: 0 0; } to { background-position: 1000px 1000px; } }
         * { cursor: none !important; box-sizing: border-box; }
 
@@ -32,43 +30,43 @@
             scroll-behavior: smooth;
         }
 
-        /* PUNTERO DE OJO [vía historial] */
+        #loader {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: #000; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; z-index: 9999;
+            transition: opacity 1s ease;
+        }
+        .bienvenido-txt { font-size: 3rem; font-weight: 800; letter-spacing: 10px; color: var(--pink-baby); }
+
         #luyu-cursor {
             position: fixed; top: 0; left: 0; width: 60px; height: 60px;
             pointer-events: none; z-index: 10000; display: flex; justify-content: center; align-items: center;
-            transition: transform 0.1s ease-out;
         }
         .eye-svg { width: 100%; height: 100%; stroke: var(--pink-baby); stroke-width: 2.5; fill: none; }
         .eye-pupil { fill: var(--pink-baby); stroke: none; }
 
-        /* NAVEGACIÓN SUPERIOR [vía historial] */
         .top-nav {
-            width: 100%; padding: 40px 10%; display: flex; gap: 25px;
-            justify-content: flex-end; position: absolute; top: 0; left: 0; z-index: 100;
+            width: 100%; padding: 20px 10%; display: flex; gap: 15px;
+            justify-content: flex-end; position: fixed; top: 0; left: 0; z-index: 500;
+            background: rgba(0,0,0,0.5); backdrop-filter: blur(5px);
         }
         .nav-link {
-            font-size: 0.75rem; font-weight: 800; text-transform: uppercase;
-            letter-spacing: 3px; color: var(--text-white); text-decoration: none;
-            opacity: 0.7; transition: 0.4s;
+            font-size: 0.7rem; font-weight: 800; text-transform: uppercase;
+            letter-spacing: 2px; color: var(--text-white); text-decoration: none;
+            transition: 0.4s;
         }
-        .nav-link:hover { opacity: 1; color: var(--pink-baby); transform: translateX(10px) skewX(-10deg); }
+        .nav-link:hover { color: var(--pink-baby); transform: translateX(5px) skewX(-10deg); }
 
-        /* NOMBRE (ESTILO LU YU, UN SOLO COLOR [vía historial]) */
         .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
         .hero h1 { 
-            font-size: clamp(3.5rem, 15vw, 9rem); 
-            font-weight: 800; 
-            line-height: 0.8; 
-            margin: 0; 
-            letter-spacing: -5px; 
-            text-transform: uppercase;
+            font-size: clamp(2.5rem, 12vw, 9rem); 
+            font-weight: 800; line-height: 0.85; margin: 0; 
+            letter-spacing: -3px; text-transform: uppercase;
             color: var(--pink-baby);
-            text-shadow: 0 0 20px rgba(255, 182, 193, 0.5);
         }
 
-        /* SECCIONES Y REVELACIÓN [4, 5] */
         .reveal {
-            opacity: 0; transform: translateY(60px);
+            opacity: 0; transform: translateY(40px);
             transition: all 1s cubic-bezier(0.2, 1, 0.3, 1);
             padding: 100px 10%; border-top: 1px solid rgba(255, 182, 193, 0.2);
         }
@@ -78,24 +76,80 @@
             letter-spacing: 5px; font-size: 2.2rem; margin-bottom: 40px; display: block;
         }
 
-        /* FOTO RECTANGULAR [vía historial] */
-        .profile-container { display: flex; align-items: flex-start; gap: 50px; flex-wrap: wrap; }
-        .profile-photo {
-            width: 100%; max-width: 400px; border: 2px solid var(--pink-baby);
-            box-shadow: 0 0 20px rgba(255, 182, 193, 0.3);
+        /* ==========================================================
+           PROFILE: FOTO SIN BORDES NEGROS Y CON FRENTE VISIBLE
+           ========================================================== */
+        .profile-container {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+            flex-wrap: wrap;
         }
-        .profile-photo img { width: 100%; height: auto; display: block; }
 
-        .item-move { transition: transform 0.4s ease; display: block; width: fit-content; }
-        .item-move:hover { transform: translateX(20px) skewX(-5deg); }
+        .profile-photo {
+            flex: 0 0 350px;
+            width: 350px;
+            height: 450px;
+            border: 6px solid var(--pink-baby);
+            box-shadow: 0 0 40px rgba(255, 182, 193, 0.5);
+            background-image: url('mi-foto.jpeg');
+            background-size: cover;
+            /* IMPORTANTE: Mueve la imagen hacia ABAJO para que la frente NO se recorte */
+            background-position: center 25%;
+            background-repeat: no-repeat;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+        .profile-photo:hover {
+            transform: scale(1.03);
+            box-shadow: 0 0 60px rgba(255, 182, 193, 0.8);
+        }
+        .profile-photo img {
+            display: none;
+        }
 
-        /* LISTAS Y LINKS [1, 6] */
+        .profile-text {
+            flex: 1;
+            min-width: 280px;
+            font-size: 1.3rem;
+            line-height: 1.8;
+            font-weight: 300;
+            color: white;
+        }
+        .profile-text a {
+            color: var(--pink-baby);
+            text-decoration: underline;
+            font-weight: bold;
+        }
+        .profile-text a:hover {
+            color: #fff;
+        }
+
+        @media (max-width: 768px) {
+            .profile-container {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                gap: 30px;
+            }
+            .profile-photo {
+                flex: 0 0 280px;
+                width: 280px;
+                height: 360px;
+            }
+            .profile-text {
+                font-size: 1.1rem;
+            }
+        }
+
+        /* LISTAS Y LINKS */
         .content-list { list-style: none; padding: 0; margin: 0; }
         .content-list li { font-size: 1.2rem; margin-bottom: 15px; border-left: 3px solid var(--pink-baby); padding-left: 20px; }
         a { color: inherit; text-decoration: underline; font-weight: bold; }
         a:hover { color: var(--pink-baby); }
 
-        /* INTERESES CON MOVIMIENTO [1, 5] */
+        .network-list { column-count: 2; font-size: 0.9rem; }
+        @media (max-width: 768px) { .network-list { column-count: 1; } }
+
         @keyframes moverPaisaje { from { background-position: 0% 50%; } to { background-position: 100% 50%; } }
         .interests-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 40px; margin-top: 50px; }
         .circle-interest {
@@ -106,11 +160,28 @@
             text-shadow: 2px 2px 10px #000; font-size: 1.1rem;
         }
 
-        footer { padding: 100px 10%; text-align: center; }
-        .frase-final { font-size: 3rem; font-style: italic; margin-bottom: 20px; display: block; text-decoration: none; color: var(--text-white); }
+        footer {
+            padding: 100px 10%;
+            text-align: center;
+        }
+        .frase-final {
+            font-size: 2.5rem;
+            font-style: italic;
+            color: white;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 20px;
+        }
+        .frase-final:hover {
+            color: var(--pink-baby);
+        }
     </style>
 </head>
 <body>
+
+    <div id="loader">
+        <div class="bienvenido-txt">BIENVENIDO</div>
+    </div>
 
     <div id="luyu-cursor">
         <svg class="eye-svg" viewBox="0 0 100 100">
@@ -129,112 +200,120 @@
             <a href="#contact" class="nav-link">Contact</a>
         </nav>
 
-        <section class="hero reveal">
+        <section class="hero">
             <h1>LUZ MELANIA<br>HUAMANI CASTILLO</h1>
-            <p style="color: var(--text-white); letter-spacing: 10px; font-weight: 800; margin-top: 30px;">ESTUDIANTE UCSP</p>
+            <p style="color: white; letter-spacing: 10px; font-weight: 800; margin-top: 30px;">ESTUDIANTE UCSP</p>
         </section>
 
-        <!-- 01. PROFILE -->
+        <!-- ============================================================
+             PROFILE: FOTO CON FRENTE VISIBLE
+             ============================================================ -->
         <section id="profile" class="reveal">
             <span class="section-label">01. Profile</span>
             <div class="profile-container">
-                <div class="profile-photo item-move">
-                    <img src="tu-foto.jpg" alt="Luz Melania">
+                <div class="profile-photo" 
+                     style="background-image: url('mi-foto.jpeg');">
+                    <!-- Si no funciona, usa la URL directa: 
+                    style="background-image: url('https://raw.githubusercontent.com/luzMHC/luz-melania-huamani-castillo/main/mi-foto.jpeg');" -->
+                    <img src="mi-foto.jpeg" alt="Luz Melania Huamani Castillo" style="display: none;">
                 </div>
-                <div style="font-size: 1.4rem; line-height: 1.8; font-weight: 300; max-width: 600px; color: white;">
-                    <p class="item-move">Hola, soy estudiante de la carrera de <a href="https://ucsp.edu.pe/carreras/administracion-negocios/" target="_blank">Administración de Negocios</a> en la <a href="https://ucsp.edu.pe/" target="_blank">Universidad Católica San Pablo (UCSP)</a>. </p>
-                    <p class="item-move">Tengo un gran interés por la gestión empresarial, la optimización de procesos y el desarrollo de habilidades de liderazgo que permitan generar un impacto positivo en las organizaciones. [vía historial]</p>
+
+                <div class="profile-text">
+                    <p>Hola, soy estudiante de la carrera de <a href="https://ucsp.edu.pe/carreras/administracion-negocios/" target="_blank">Administración de Negocios</a> en la <a href="https://ucsp.edu.pe/" target="_blank">Universidad Católica San Pablo (UCSP)</a>.</p>
+                    <p>Tengo un gran interés por la gestión empresarial, la optimización de procesos y el desarrollo de habilidades de liderazgo que permitan generar un impacto positivo en las organizaciones.</p>
                 </div>
             </div>
         </section>
 
-        <!-- 02. ACADEMIC -->
+        <!-- 02: ACADEMIC -->
         <section id="academic" class="reveal">
             <span class="section-label">02. Academic</span>
             <ul class="content-list">
-                <li class="item-move">Contabilidad – <a href="https://www.linkedin.com/in/geraldine-farf%C3%A1n-caballero-aa4a4572/" target="_blank">Geraldine Beatriz Farfán Caballero</a></li>
-                <li class="item-move">Historia del Occidente I – <a href="https://www.linkedin.com/in/mario-rommel-arce-espinoza-94585b19a/" target="_blank">Mario Rommel Arce Espinoza</a></li>
-                <li class="item-move">Filosofía de la Naturaleza – <a href="https://www.linkedin.com/in/isabelmoralesb/" target="_blank">Isabel Morales Benito</a></li>
-                <li class="item-move">Cálculo en una variable – <a href="https://www.linkedin.com/in/maribel-marianela-8453a61a7/" target="_blank">Maribel Marianela Quiroz Zegarra</a></li>
-                <li class="item-move">Liderazgo – <a href="https://www.linkedin.com/in/andr%C3%A9s-gabriel-paz-guillen-210767410/" target="_blank">Andrés Gabriel Paz Guillen</a></li>
-                <li class="item-move">Pensamiento Computacional – <a href="https://www.linkedin.com/in/ecuadrosv/" target="_blank">Ernesto Cuadros Vargas</a></li>
+                <li>Contabilidad – <a href="https://www.linkedin.com/in/geraldine-farf%C3%A1n-caballero-aa4a4572/" target="_blank">Geraldine Beatriz Farfán Caballero</a></li>
+                <li>Historia del Occidente I – <a href="https://www.linkedin.com/in/mario-rommel-arce-espinoza-94585b19a/" target="_blank">Mario Rommel Arce Espinoza</a></li>
+                <li>Filosofía de la Naturaleza – <a href="https://www.linkedin.com/in/isabelmoralesb/" target="_blank">Isabel Morales Benito</a></li>
+                <li>Cálculo en una variable – <a href="https://www.linkedin.com/in/maribel-marianela-8453a61a7/" target="_blank">Maribel Marianela Quiroz Zegarra</a></li>
+                <li>Liderazgo – <a href="https://www.linkedin.com/in/andr%C3%A9s-gabriel-paz-guillen-210767410/" target="_blank">Andrés Gabriel Paz Guillen</a></li>
+                <li>Pensamiento Computacional – <a href="https://www.linkedin.com/in/ecuadrosv/" target="_blank">Ernesto Cuadros Vargas</a></li>
             </ul>
         </section>
 
-        <!-- 03. NETWORK -->
+        <!-- 03: NETWORK -->
         <section id="network" class="reveal">
             <span class="section-label">03. Network</span>
-            <p class="item-move" style="color: #ffffff; font-size: 1.5rem; font-weight: 800; margin-bottom: 20px;">Enlaces de mis compañeros.</p>
-            <ul class="content-list" style="column-count: 2; font-size: 0.9rem;">
-                <li class="item-move">Flavio Alessandro Yazid Hancco Chaiña</li>
-                <li class="item-move"><a href="https://gabriel-flores-ll.github.io/" target="_blank">Gabriel Fabrizio Flores Llancaya</a></li>
-                <li class="item-move"><a href="https://w4nd4r1.github.io/Ariana-Yasmin-Delgado-Arce/" target="_blank">Ariana Yasmín Delgado Arce</a></li>
-                <li class="item-move"><a href="https://aaronhumpiri.github.io/" target="_blank">Aaron Humpiri Obregon</a></li>
-                <li class="item-move"><a href="https://kenya-sq.github.io/Kenya-Shupingahua-Quiroz/" target="_blank">Kenya Magdiel Shupingahua Quiroz</a></li>
-                <li class="item-move"><a href="https://faro-m.github.io/Pagina-Web-UCSP/" target="_blank">Farid Aarom Morales Gonzales</a></li>
-                <li class="item-move"><a href="https://camilasherlyn.github.io/uscpcienciascami/" target="_blank">Camila Sherlyn Ayamamani Hinojosa</a></li>
-                <li class="item-move"><a href="https://thepandoredxxo.github.io/Alejandro-Jacob-Valencia-Delgado-pagina-web-ICC-san-pablo/" target="_blank">Alejandro Jacob Valencia Delgado</a></li>
-                <li class="item-move"><a href="https://yeniferhuarachi-code.github.io/yeniferhuarachihalanoca.github.io/" target="_blank">Yenifer Rocio Huarachi Halanoca</a></li>
-                <li class="item-move"><a href="https://yerriflores.github.io/" target="_blank">YerrI Tony Flores Velasquez</a></li>
-                <li class="item-move"><a href="https://franmnm.github.io/" target="_blank">Franco Yerix Aguilar Yucra</a></li>
-                <li class="item-move"><a href="https://annyaguilar-hub.github.io/anny_aguilar_cv/" target="_blank">Gael Andre Sandoval Garcia</a></li>
-                <li class="item-move">Aguilar Zambrano Anny Briyid</li>
-                <li class="item-move"><a href="https://angelfabianramosmunoz.github.io/" target="_blank">Angel Fabian Ramos Muñoz</a></li>
-                <li class="item-move"><a href="https://diegoalonsoaragonmamani.github.io/DiegoAlonsoAragonMamani/" target="_blank">Diego Alonso Aragon Mamani</a></li>
-                <li class="item-move"><a href="https://timely-crepe-7fb679.netlify.app/" target="_blank">Vivian Elizabeth Rivera Cosi</a></li>
-                <li class="item-move"><a href="https://paputilin123.github.io/cvproyectnew/" target="_blank">Cristopher Maqquera Machaca</a></li>
-                <li class="item-move"><a href="https://nicocespedes0909-jpg.github.io/Nicole-Estefany-Cespedes-Conchacalle.github.io/" target="_blank">Nicole Estefany Cespedes Conchacalle</a></li>
-                <li class="item-move"><a href="https://michaelcadena-lp.github.io/" target="_blank">Michael Fabian Cadena Candia</a></li>
-                <li class="item-move"><a href="https://miguelezz.github.io/miguel-angel-atawi-zuniga-chacon/" target="_blank">Miguel Zuñiga Chacon</a></li>
-                <li class="item-move"><a href="https://fabrizioflv.github.io/fabrizio-web/" target="_blank">Fabrizio Manuel Flores Valencia</a></li>
-                <li class="item-move"><a href="https://jhshongw08.github.io/juanjosheptshongwparedesallasi/" target="_blank">Joshept Paredes Hallasi</a></li>
-                <li class="item-move"><a href="https://andreazevallos.github.io/Pagina-web-Andrea-Zevallos/" target="_blank">Andrea Milagros Zevallos Apaza</a></li>
-                <li class="item-move"><a href="https://giiovanniandresaguilarmarquez-collab.github.io/giovanniandresaguilarmarquez/" target="_blank">Giovanni Andrés Aguilar Marquez</a></li>
-                <li class="item-move"><a href="https://rodango.github.io/rodrigo-daniel-gaona-orozco/" target="_blank">Rodrigo Daniel Gaona Orozco</a></li>
-                <li class="item-move"><a href="https://skjr3.github.io/Mi-pagina-web/" target="_blank">Erick Eloy Mullisaca Alviz</a></li>
-                <li class="item-move"><a href="https://lucianavelarde.github.io/lucianamercedesvelardecaceres.github.io/" target="_blank">Luciana Mercedes Velarde Caceres</a></li>
-                <li class="item-move"><a href="https://github.com/yerikvilca-cloud/Yerik-Vilca.git" target="_blank">Yerik Michel Vilca Mendoza</a></li>
-                <li class="item-move"><a href="https://juan-rodrigo-tacca-paucar.github.io/Juan-Rodrigo-Tacca-Paucar-Estudiante-de-Administraci-n-de-Negocios/" target="_blank">Juan Rodrigo Tacca Paucar</a></li>
-                <li class="item-move"><a href="https://mirellasanchez.github.io/mirella-rossy-sanchez-quispe/" target="_blank">Mirella rossy sanchez quispe</a></li>
-                <li class="item-move"><a href="https://amiandia-oss.github.io/Ami-Hanna-Andia-Choque/" target="_blank">Ami Hanna Andía Choque</a></li>
-                <li class="item-move"><a href="https://judavi-dev.github.io/" target="_blank">Juan David Garcia Humpire</a></li>
-                <li class="item-move"><a href="https://mi-pagina-xipc.vercel.app/" target="_blank">Fernando Sebastian Vera Ramos</a></li>
-                <li class="item-move"><a href="https://thiagonieves-eng.github.io" target="_blank">Thiago Mathias Nieves Checca</a></li>
+            <p style="color: #ffffff; font-size: 1.5rem; font-weight: 800; margin-bottom: 20px;">Enlaces de mis compañeros.</p>
+            <ul class="content-list network-list">
+                <li>Flavio Alessandro Yazid Hancco Chaiña</li>
+                <li>Fabrizio Alessandro Ocsa Sanchez – <a href="#">Fabrizio Ocsa</a></li>
+                <li><a href="https://gabriel-flores-ll.github.io/" target="_blank">Gabriel Fabrizio Flores Llancaya</a></li>
+                <li><a href="https://w4nd4r1.github.io/Ariana-Yasmin-Delgado-Arce/" target="_blank">Ariana Yasmín Delgado Arce</a></li>
+                <li><a href="https://aaronhumpiri.github.io/" target="_blank">Aaron Humpiri Obregon</a></li>
+                <li><a href="https://kenya-sq.github.io/Kenya-Shupingahua-Quiroz/" target="_blank">Kenya Magdiel Shupingahua Quiroz</a></li>
+                <li><a href="https://faro-m.github.io/Pagina-Web-UCSP/" target="_blank">Farid Aarom Morales Gonzales</a></li>
+                <li><a href="https://camilasherlyn.github.io/uscpcienciascami/" target="_blank">Camila Sherlyn Ayamamani Hinojosa</a></li>
+                <li><a href="https://thepandoredxxo.github.io/Alejandro-Jacob-Valencia-Delgado-pagina-web-ICC-san-pablo/" target="_blank">Alejandro Jacob Valencia Delgado</a></li>
+                <li><a href="https://yeniferhuarachi-code.github.io/yeniferhuarachihalanoca.github.io/" target="_blank">Yenifer Rocio Huarachi Halanoca</a></li>
+                <li><a href="https://yerriflores.github.io/" target="_blank">YerrI Tony Flores Velasquez</a></li>
+                <li><a href="https://franmnm.github.io/" target="_blank">Franco Yerix Aguilar Yucra</a></li>
+                <li><a href="https://annyaguilar-hub.github.io/anny_aguilar_cv/" target="_blank">Gael Andre Sandoval Garcia</a></li>
+                <li>Aguilar Zambrano Anny Briyid</li>
+                <li><a href="https://angelfabianramosmunoz.github.io/" target="_blank">Angel Fabian Ramos Muñoz</a></li>
+                <li><a href="https://diegoalonsoaragonmamani.github.io/DiegoAlonsoAragonMamani/" target="_blank">Diego Alonso Aragon Mamani</a></li>
+                <li><a href="https://timely-crepe-7fb679.netlify.app/" target="_blank">Vivian Elizabeth Rivera Cosi</a></li>
+                <li><a href="https://paputilin123.github.io/cvproyectnew/" target="_blank">Cristopher Maqquera Machaca</a></li>
+                <li><a href="https://nicocespedes0909-jpg.github.io/Nicole-Estefany-Cespedes-Conchacalle.github.io/" target="_blank">Nicole Estefany Cespedes Conchacalle</a></li>
+                <li><a href="https://michaelcadena-lp.github.io/" target="_blank">Michael Fabian Cadena Candia</a></li>
+                <li><a href="https://miguelezz.github.io/miguel-angel-atawi-zuniga-chacon/" target="_blank">Miguel Zuñiga Chacon</a></li>
+                <li><a href="https://fabrizioflv.github.io/fabrizio-web/" target="_blank">Fabrizio Manuel Flores Valencia</a></li>
+                <li><a href="https://jhshongw08.github.io/juanjosheptshongwparedesallasi/" target="_blank">Joshept Paredes Hallasi</a></li>
+                <li><a href="https://andreazevallos.github.io/Pagina-web-Andrea-Zevallos/" target="_blank">Andrea Milagros Zevallos Apaza</a></li>
+                <li><a href="https://giiovanniandresaguilarmarquez-collab.github.io/giovanniandresaguilarmarquez/" target="_blank">Giovanni Andrés Aguilar Marquez</a></li>
+                <li><a href="https://rodango.github.io/rodrigo-daniel-gaona-orozco/" target="_blank">Rodrigo Daniel Gaona Orozco</a></li>
+                <li><a href="https://skjr3.github.io/Mi-pagina-web/" target="_blank">Erick Eloy Mullisaca Alviz</a></li>
+                <li><a href="https://lucianavelarde.github.io/lucianamercedesvelardecaceres.github.io/" target="_blank">Luciana Mercedes Velarde Caceres</a></li>
+                <li><a href="https://github.com/yerikvilca-cloud/Yerik-Vilca.git" target="_blank">Yerik Michel Vilca Mendoza</a></li>
+                <li><a href="https://juan-rodrigo-tacca-paucar.github.io/Juan-Rodrigo-Tacca-Paucar-Estudiante-de-Administraci-n-de-Negocios/" target="_blank">Juan Rodrigo Tacca Paucar</a></li>
+                <li><a href="https://mirellasanchez.github.io/mirella-rossy-sanchez-quispe/" target="_blank">Mirella rossy sanchez quispe</a></li>
+                <li><a href="https://amiandia-oss.github.io/Ami-Hanna-Andia-Choque/" target="_blank">Ami Hanna Andía Choque</a></li>
+                <li><a href="https://judavi-dev.github.io/" target="_blank">Juan David Garcia Humpire</a></li>
+                <li><a href="https://mi-pagina-xipc.vercel.app/" target="_blank">Fernando Sebastian Vera Ramos</a></li>
+                <li><a href="https://thiagonieves-eng.github.io" target="_blank">Thiago Mathias Nieves Checca</a></li>
+                <li>Sebastián Jesús Olivera Alemán</li>
             </ul>
         </section>
 
-        <!-- 04. INTERESTS -->
+        <!-- 04: INTERESTS -->
         <section id="interests" class="reveal">
             <span class="section-label">04. Interests</span>
             <div class="interests-grid">
-                <div class="circle-interest item-move" style="background-image: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=600');">
-                    🌸 Me gusta correr y mantenerme en movimiento. 
+                <div class="circle-interest" style="background-image: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=600');">
+                    🌸 Me gusta correr y mantenerme en movimiento.
                 </div>
-                <div class="circle-interest item-move" style="background-image: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1512820790803-83ca734da794?q=80&w=600');">
-                    📖 Disfruto leer en la biblioteca digital <a href="https://www.ellibrototal.com/ltotal/" target="_blank" style="color: white;">El Libro Total</a>. 
+                <div class="circle-interest" style="background-image: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1512820790803-83ca734da794?q=80&w=600');">
+                    📖 Disfruto leer en la biblioteca digital <a href="https://www.ellibrototal.com/ltotal/" target="_blank" style="color: white; text-decoration: underline;">El Libro Total</a>.
                 </div>
-                <div class="circle-interest item-move" style="background-image: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1503220317375-aaad61436b1b?q=80&w=600');">
-                    ✈️ Me gusta viajar y conocer nuevas culturas.
+                <div class="circle-interest" style="background-image: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1503220317375-aaad61436b1b?q=80&w=600');">
+                    ✈️ Me apasiona viajar y conocer culturas.
                 </div>
-                <div class="circle-interest item-move" style="background-image: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1514525253361-bee8718a34a1?q=80&w=600');">
-                    🎵 Me gusta escuchar música.
+                <div class="circle-interest" style="background-image: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1514525253361-bee8718a34a1?q=80&w=600');">
+                    🎵 Me relaja escuchar música al estudiar.
                 </div>
             </div>
         </section>
 
-        <!-- 05. CONTACT -->
+        <!-- 05: CONTACT -->
         <section id="contact" class="reveal">
             <span class="section-label">05. Contact</span>
             <ul class="content-list">
-                <li class="item-move">📧 Email: <a href="mailto:luz.huamani.castillo@ucsp.edu.pe" style="text-decoration: none; color: var(--pink-baby);">luz.huamani.castillo@ucsp.edu.pe</a></li>
-                <li class="item-move">🔗 LinkedIn: <a href="https://www.linkedin.com/in/luz-melania-huamani-castillo-bb7ab1410/" target="_blank" style="text-decoration: none; color: var(--pink-baby);">Luz Melania Huamani Castillo</a></li>
-                <li class="item-move">🏫 University: <a href="https://ucsp.edu.pe/" target="_blank" style="text-decoration: none; color: var(--pink-baby);">UCSP</a></li>
+                <li>📧 Email: <a href="mailto:luz.huamani.castillo@ucsp.edu.pe" style="color: var(--pink-baby);">luz.huamani.castillo@ucsp.edu.pe</a></li>
+                <li>🔗 LinkedIn: <a href="https://www.linkedin.com/in/luz-melania-huamani-castillo-bb7ab1410/" target="_blank" style="color: var(--pink-baby);">Luz Melania Huamani Castillo</a></li>
+                <li>🏫 University: <a href="https://ucsp.edu.pe/" target="_blank" style="color: var(--pink-baby);">Universidad Católica San Pablo (UCSP)</a></li>
             </ul>
         </section>
 
         <footer>
-            <a href="https://www.clarin.com/informacion-general/per-aspera-ad-astra-significa-frase-filosofia-romana-ayuda-enfrentar-complicaciones-vida_0_qsWrWl7CjB.html" target="_blank" class="frase-final">"Per aspera ad astra"</a> 
-            <div style="opacity: 0.5;">© LUZ MELANIA 2026</div> 
+            <a href="https://www.clarin.com/informacion-general/per-aspera-ad-astra-significa-frase-filosofia-romana-ayuda-enfrentar-complicaciones-vida_0_qsWrWl7CjB.html" target="_blank" class="frase-final">"Per aspera ad astra"</a>
+            <div style="opacity: 0.5;">© LUZ MELANIA 2026</div>
         </footer>
     </div>
 
@@ -249,11 +328,19 @@
             for (var i = 0; i < reveals.length; i++) {
                 var windowHeight = window.innerHeight;
                 var elementTop = reveals[i].getBoundingClientRect().top;
-                if (elementTop < windowHeight - 150) { reveals[i].classList.add("active"); }
+                if (elementTop < windowHeight - 50) { reveals[i].classList.add("active"); }
             }
         }
         window.addEventListener("scroll", reveal);
-        reveal();
+
+        setTimeout(() => {
+            const loader = document.getElementById('loader');
+            loader.style.opacity = '0';
+            setTimeout(() => { 
+                loader.style.display = 'none'; 
+                reveal(); 
+            }, 1000);
+        }, 3000);
     </script>
 </body>
 </html>
