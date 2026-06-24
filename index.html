@@ -45,6 +45,9 @@
         .eye-svg { width: 100%; height: 100%; stroke: var(--pink-baby); stroke-width: 2.5; fill: none; }
         .eye-pupil { fill: var(--pink-baby); stroke: none; }
 
+        /* ============================================================
+           NAVEGACIÓN CON MOVIMIENTOS DE QUIEBRE (SKEW)
+           ============================================================ */
         .top-nav {
             width: 100%; padding: 20px 10%; display: flex; gap: 15px;
             justify-content: flex-end; position: fixed; top: 0; left: 0; z-index: 500;
@@ -53,9 +56,21 @@
         .nav-link {
             font-size: 0.7rem; font-weight: 800; text-transform: uppercase;
             letter-spacing: 2px; color: var(--text-white); text-decoration: none;
-            transition: 0.4s;
+            transition: 0.4s ease;
+            display: inline-block;
         }
-        .nav-link:hover { color: var(--pink-baby); transform: translateX(5px) skewX(-10deg); }
+        /* Movimiento individual: uno a derecha, otro a izquierda */
+        .nav-link:nth-child(odd):hover {
+            transform: translateX(15px) skewX(-10deg);
+            color: var(--pink-baby);
+        }
+        .nav-link:nth-child(even):hover {
+            transform: translateX(-15px) skewX(10deg);
+            color: var(--pink-baby);
+        }
+        .nav-link:hover {
+            opacity: 1;
+        }
 
         .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
         .hero h1 { 
@@ -76,9 +91,9 @@
             letter-spacing: 5px; font-size: 2.2rem; margin-bottom: 40px; display: block;
         }
 
-        /* ==========================================================
+        /* ============================================================
            PROFILE: FOTO SIN BORDES NEGROS Y CON FRENTE VISIBLE
-           ========================================================== */
+           ============================================================ */
         .profile-container {
             display: flex;
             align-items: center;
@@ -94,7 +109,6 @@
             box-shadow: 0 0 40px rgba(255, 182, 193, 0.5);
             background-image: url('mi-foto.jpeg');
             background-size: cover;
-            /* IMPORTANTE: Mueve la imagen hacia ABAJO para que la frente NO se recorte */
             background-position: center 25%;
             background-repeat: no-repeat;
             transition: transform 0.4s ease, box-shadow 0.4s ease;
@@ -141,11 +155,35 @@
             }
         }
 
-        /* LISTAS Y LINKS */
+        /* ============================================================
+           LISTAS CON MOVIMIENTO DE QUIEBRE
+           ============================================================ */
         .content-list { list-style: none; padding: 0; margin: 0; }
-        .content-list li { font-size: 1.2rem; margin-bottom: 15px; border-left: 3px solid var(--pink-baby); padding-left: 20px; }
-        a { color: inherit; text-decoration: underline; font-weight: bold; }
-        a:hover { color: var(--pink-baby); }
+        .content-list li {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            border-left: 3px solid var(--pink-baby);
+            padding-left: 20px;
+            transition: transform 0.4s ease;
+            display: block;
+            width: fit-content;
+        }
+        /* Movimiento individual en los items de lista */
+        .content-list li:nth-child(odd):hover {
+            transform: translateX(30px) skewX(-5deg);
+        }
+        .content-list li:nth-child(even):hover {
+            transform: translateX(-30px) skewX(5deg);
+        }
+
+        .content-list a {
+            color: var(--pink-baby);
+            font-weight: 800;
+            text-decoration: none;
+        }
+        .content-list a:hover {
+            text-decoration: underline;
+        }
 
         .network-list { column-count: 2; font-size: 0.9rem; }
         @media (max-width: 768px) { .network-list { column-count: 1; } }
@@ -192,6 +230,9 @@
     </div>
 
     <div id="main-content">
+        <!-- ============================================================
+             NAVEGACIÓN CON MOVIMIENTOS RESTAURADOS
+             ============================================================ -->
         <nav class="top-nav">
             <a href="#profile" class="nav-link">Profile</a>
             <a href="#academic" class="nav-link">Academic</a>
@@ -213,8 +254,6 @@
             <div class="profile-container">
                 <div class="profile-photo" 
                      style="background-image: url('mi-foto.jpeg');">
-                    <!-- Si no funciona, usa la URL directa: 
-                    style="background-image: url('https://raw.githubusercontent.com/luzMHC/luz-melania-huamani-castillo/main/mi-foto.jpeg');" -->
                     <img src="mi-foto.jpeg" alt="Luz Melania Huamani Castillo" style="display: none;">
                 </div>
 
